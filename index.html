@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>demo</title>	
+<head>
+</head>
+<body>
+1234567
+</body>
+<script type="text/javascript" src='./src/loadpage.js'></script>
+<script>
+let div_str = `
+  <ul role="progressbar" style="margin:auto;">
+    <li role="presentation"></li>
+    <li role="presentation"></li>
+    <li role="presentation"></li>
+    <li role="presentation"></li>
+    <li role="presentation"></li>
+    <li role="presentation"></li>
+    <li role="presentation"></li>
+  </ul>`;
+let load = new loadpage({ delayTime: 1000, divHtml: div_str, loadCss: './css/style2.css'});
+load.loading();
+</script>
+</html>
