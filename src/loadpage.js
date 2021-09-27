@@ -40,7 +40,7 @@ class loadpage {
 		let css = `
             .fc_loadpage{
                 width:100% !important;
-                height:1000px !important;
+                height:calc(100%) !important;
 				background-image: radial-gradient(circle farthest-corner at center, #FFF 0%, #F8F8F8 100%) !important;
 				opacity:1 !important;
 				filter:alpha(opacity=100) !important;

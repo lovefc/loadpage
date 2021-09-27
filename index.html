@@ -11,6 +11,7 @@
 </body>
 <script type="text/javascript" src='./src/loadpage.js'></script>
 <script>
+/**
 let div_str = `
   <ul role="progressbar" style="margin:auto;">
     <li role="presentation"></li>
@@ -21,7 +22,40 @@ let div_str = `
     <li role="presentation"></li>
     <li role="presentation"></li>
   </ul>`;
-let load = new loadpage({ delayTime: 1000, divHtml: div_str, loadCss: './css/style2.css'});
+**/
+let div_str = `
+	<div class="container">
+		<div class="wrapper">
+			<div class="loader">
+				<div class="dot">
+				</div>
+			</div>
+			<div class="loader">
+				<div class="dot">
+				</div>
+			</div>
+			<div class="loader">
+				<div class="dot">
+				</div>
+			</div>
+			<div class="loader">
+				<div class="dot">
+				</div>
+			</div>
+			<div class="loader">
+				<div class="dot">
+				</div>
+			</div>
+			<div class="loader">
+				<div class="dot">
+				</div>
+			</div>
+		</div>
+		<div class="text">
+			Please wait</div>
+	</div>
+`;
+let load = new loadpage({ delayTime: 3000, divHtml: div_str, loadCss: './css/style3.css'});
 load.loading();
 </script>
 </html>
