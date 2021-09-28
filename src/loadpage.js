@@ -6,7 +6,6 @@
  * gitee: https://gitee.com/lovefc/loadpage
  * time: 2021/09/27 17:18
  */
-
 class loadpage {
 	// 构造函数,开始了
 	constructor(options) {
@@ -27,10 +26,22 @@ class loadpage {
 				that[key] = options[key];
 			}
 		}
+	
+		if (this.isSystem()==='node') {
+			require(`${this.loadCss}`);
+		}		
+	}
+
+	isSystem() {
+		if (typeof window === 'object') {
+			return 'win';
+		} else if (Object.prototype.toString.call(process) === '[object process]') {
+			return 'node';
+		}
 	}
 
 	loading() {
-		this.openLoading();			
+		this.openLoading();
 		this.addHeadJs();
 	}
 
@@ -60,17 +71,19 @@ class loadpage {
 		}
 		head.appendChild(style);
 	}
-	
-	openLoading(){
+
+	openLoading() {
 		this.addHeadCss();
-		this.loadStyle(this.loadCss, 'head');
-		this.addLoadIngDiv();		
+		if (this.isSystem()==='win') {
+			this.loadStyle(this.loadCss, 'head');
+		}
+		this.addLoadIngDiv();
 	}
-	
+
 	// 关闭
-	closeLoading(){
-	    let box=document.getElementById("fc_loader");
-	    if(box) box.remove();
+	closeLoading() {
+		let box = document.getElementById("fc_loader");
+		if (box) box.remove();
 	}
 
 	addHeadJs() {
@@ -175,4 +188,5 @@ class loadpage {
 });
 
 
-
+//let load = new loadpage({ delayTime: 5000 });
+//load.loading();
