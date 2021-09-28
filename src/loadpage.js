@@ -4,34 +4,37 @@
  * blog：https://lovefc.cn
  * github: https://github.com/lovefc/loadpage
  * gitee: https://gitee.com/lovefc/loadpage
- * time: 2021/09/27 17:18
+ * time: 2021/09/28 17:41
  */
 class loadpage {
 	// 构造函数,开始了
 	constructor(options) {
-
 		let that = this;
-
 		this.loadCss = './css/style.css'; // 要加载的css
+		
+		this.animateCss = './css/animate.css'; // 要加载动画css
+		
+		this.animateName = 'fadeOut'; // 要执行的动画名称
 
 		this.delayTime = 1000; // 延迟时间 
+		
+		this.loadMode = 'all'; // 加载方式,part(局部,也就是dom渲染完),all(等待图片等资源)
 
 		this.divHtml = `
             <div class="loader"><div class="inner one"></div><div class="inner two"></div><div class="inner three"></div></div>		
 		`;
-
 		// 这里用了个暴力的方式来覆盖初始配置
 		for (let key in options) {
 			if (key in that) {
 				that[key] = options[key];
 			}
 		}
-	
 		if (this.isSystem()==='node') {
 			require(`${this.loadCss}`);
+			require(`${this.animateCss}`);
 		}		
 	}
-
+	// 判断执行模式
 	isSystem() {
 		if (typeof window === 'object') {
 			return 'win';
@@ -39,12 +42,10 @@ class loadpage {
 			return 'node';
 		}
 	}
-
 	loading() {
 		this.openLoading();
 		this.addHeadJs();
 	}
-
 	addHeadCss() {
 		let head = document.getElementsByTagName('head')[0];
 		let style = document.createElement('style');
@@ -71,42 +72,61 @@ class loadpage {
 		}
 		head.appendChild(style);
 	}
-
+	// 开启loading
 	openLoading() {
 		this.addHeadCss();
 		if (this.isSystem()==='win') {
 			this.loadStyle(this.loadCss, 'head');
+			this.loadStyle(this.animateCss,'head');
 		}
 		this.addLoadIngDiv();
 	}
-
-	// 关闭
+	// 关闭loading
 	closeLoading() {
-		let box = document.getElementById("fc_loader");
-		if (box) box.remove();
+		this.closePageLoading(this.animateName,this.delayTime);
 	}
-
+	closePageLoading(animateName,delayTime) {
+		let box = document.getElementById("fc_loader");
+		let a_time = Math.round(delayTime/1000);
+	    let animation = `${animateName} ${a_time}s`;
+	    box.style.animation=animation;
+		setTimeout(function(){
+			if (box) {
+				box.remove();
+			}
+		},(delayTime));
+	}
 	addHeadJs() {
 		let head = document.getElementsByTagName('head')[0];
 		let script = document.createElement('script');
 		script.type = 'text/javascript';
-		this.closeLoading2 = `function ${this.closeLoading}`;
-		script.text = `
-            document.onreadystatechange = runLoading;
-            function runLoading(){
-	           setTimeout(${this.closeLoading2},${this.delayTime});
-            }		
+		this.closeLoading2 = `function ${this.closePageLoading}`;
+		let dom_load = `
+			document.addEventListener('DOMContentLoaded',function(){
+	            setTimeout(${this.closeLoading2}("${this.animateName}",${this.delayTime}),${this.delayTime});
+            });		
+	    `;
+		let all_load = `
+            document.onreadystatechange = runLoading; 
+			function runLoading(){
+				if(document.readyState == "complete"){
+					setTimeout(${this.closeLoading2}("${this.animateName}",${this.delayTime}),${this.delayTime});
+				}
+			}
 		`;
+		let load = all_load;
+		if(this.loadMode === 'part'){
+			load = dom_load;
+		}
+		script.text = load;
 		head.appendChild(script);
 	}
-
 	completeLoading() {
 		if (document.readyState == "complete") {
 			let box = document.getElementById("fc_loader");
 			box.remove();
 		}
 	}
-
 	loadStyle(url, tagname) {
 		let link = document.createElement('link');
 		link.type = 'text/css';
@@ -116,7 +136,6 @@ class loadpage {
 		let em = (tagname == 'body') ? document.body : head;
 		em.appendChild(link);
 	}
-
 	removeStyle(filename) {
 		let targetelement = "link";
 		let targetattr = "href";
@@ -126,7 +145,6 @@ class loadpage {
 				allsuspects[i].parentNode.removeChild(allsuspects[i]);
 		}
 	}
-
 	loadScript(url, tagname) {
 		let script = document.createElement("script");
 		script.type = "text/javascript";
@@ -135,7 +153,6 @@ class loadpage {
 		let em = (tagname == 'body') ? document.body : head;
 		em.appendChild(script);
 	}
-
 	removeScript(filename) {
 		let targetelement = "script";
 		let targetattr = "src";
