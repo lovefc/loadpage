@@ -6,10 +6,13 @@
  * gitee: https://gitee.com/lovefc/loadpage
  * time: 2021/09/28 17:41
  */
+
 class loadpage {
 	// 构造函数,开始了
 	constructor(options) {
+		
 		let that = this;
+		
 		this.loadCss = './css/style.css'; // 要加载的css
 		
 		this.animateCss = './css/animate.css'; // 要加载动画css
@@ -28,24 +31,24 @@ class loadpage {
 			if (key in that) {
 				that[key] = options[key];
 			}
-		}
-		if (this.isSystem()==='node') {
-			require(`${this.loadCss}`);
-			require(`${this.animateCss}`);
-		}		
+		}	
 	}
 	// 判断执行模式
-	isSystem() {
-		if (typeof window === 'object') {
+	static isSystem() {
+        if ("undefined" != typeof __webpack_modules__){
+			return 'webpack';
+		} else if (typeof window === 'object') {
 			return 'win';
 		} else if (Object.prototype.toString.call(process) === '[object process]') {
 			return 'node';
 		}
 	}
+	
 	loading() {
 		this.openLoading();
 		this.addHeadJs();
 	}
+	
 	addHeadCss() {
 		let head = document.getElementsByTagName('head')[0];
 		let style = document.createElement('style');
@@ -75,7 +78,7 @@ class loadpage {
 	// 开启loading
 	openLoading() {
 		this.addHeadCss();
-		if (this.isSystem()==='win') {
+		if (loadpage.isSystem()==='win') {
 			this.loadStyle(this.loadCss, 'head');
 			this.loadStyle(this.animateCss,'head');
 		}
@@ -100,7 +103,11 @@ class loadpage {
 		let head = document.getElementsByTagName('head')[0];
 		let script = document.createElement('script');
 		script.type = 'text/javascript';
-		this.closeLoading2 = `function ${this.closePageLoading}`;
+		if(loadpage.isSystem() === 'webpack'){
+		    this.closeLoading2 = `${this.closePageLoading}`;
+		}else{
+			this.closeLoading2 = `function ${this.closePageLoading}`;
+		}
 		let dom_load = `
 			document.addEventListener('DOMContentLoaded',function(){
 	            setTimeout(${this.closeLoading2}("${this.animateName}",${this.delayTime}),${this.delayTime});
@@ -182,7 +189,6 @@ class loadpage {
 		body.style.overflow = "visible";
 		body.style.height = "auto";
 	}
-
 }
 
 ; (function (factory) {
@@ -200,10 +206,6 @@ class loadpage {
 		glob.loadpage = factory();
 	}
 })(function () {
-	'use strice';
+	'use strice';	
 	return loadpage;
 });
-
-
-//let load = new loadpage({ delayTime: 5000 });
-//load.loading();

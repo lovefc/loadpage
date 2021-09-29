@@ -8,11 +8,7 @@
     <meta http-equiv="Cache" content="no-cache">	
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>demo</title>	
-<script>
-document.addEventListener('load',function(){
-    alert(12345);
-},false);
-</script>
+	<link type="text/css" rel="stylesheet" href="./css/pure-min.css">
 <body>
 
 <img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
@@ -66,7 +62,7 @@ let div_str = `
 			加载中</div>
 	</div>
 `;
-let load = new loadpage({ delayTime: 3000, divHtml: div_str, loadCss: './css/style3.css', animateName:'pullUp',loadMode:'part'});
+let load = new loadpage({ delayTime: 1000, divHtml: div_str, loadCss: './css/style3.css', animateName:'pullUp'});
 load.loading();
 </script>
 </html>
