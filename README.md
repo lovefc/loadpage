@@ -2,6 +2,8 @@
 
 - 一款轻量级的页面加载器,可自定义动画以及加载样式
 
+- 使用简单,操作自由,支持webpack打包使用,创建属于自己的加载动画
+
 - 在线演示：https://lovefc.gitee.io/loadpage/test
 
 

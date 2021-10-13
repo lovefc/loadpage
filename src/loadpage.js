@@ -8,7 +8,7 @@
  */
 
 ;(function(exports){
-	var doc = exports.document,
+	let doc = exports.document,
 		a = {},
 		expose = +new Date(),
 		rExtractUri = /((?:http|https|file):\/\/.*?\/[^:]+)(?::\d+)?:\d+/,
@@ -18,7 +18,7 @@
 		if (doc.currentScript){
 			return doc.currentScript.src;
 		}
-		var stack;
+		let stack;
 		try{
 			a.b();
 		}
@@ -27,7 +27,7 @@
 		}
 		// IE10
 		if (stack){
-			var absPath = rExtractUri.exec(stack)[1];
+			let absPath = rExtractUri.exec(stack)[1];
 			if (absPath){
 				return absPath;
 			}
