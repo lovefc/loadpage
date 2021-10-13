@@ -7,36 +7,36 @@
  * time: 2021/09/28 17:41
  */
 
-;(function(exports){
+; (function (exports) {
 	let doc = exports.document,
 		a = {},
 		expose = +new Date(),
 		rExtractUri = /((?:http|https|file):\/\/.*?\/[^:]+)(?::\d+)?:\d+/,
 		isLtIE8 = ('' + doc.querySelector).indexOf('[native code]') === -1;
-	exports.getCurrAbsPath = function(){
+	exports.getCurrAbsPath = function () {
 		// FF,Chrome
-		if (doc.currentScript){
+		if (doc.currentScript) {
 			return doc.currentScript.src;
 		}
 		let stack;
-		try{
+		try {
 			a.b();
 		}
-		catch(e){
+		catch (e) {
 			stack = e.fileName || e.sourceURL || e.stack || e.stacktrace;
 		}
 		// IE10
-		if (stack){
+		if (stack) {
 			let absPath = rExtractUri.exec(stack)[1];
-			if (absPath){
+			if (absPath) {
 				return absPath;
 			}
 		}
 		// IE5-9
-		for(var scripts = doc.scripts,
+		for (var scripts = doc.scripts,
 			i = scripts.length - 1,
-			script; script = scripts[i--];){
-			if (script.className !== expose && script.readyState === 'interactive'){
+			script; script = scripts[i--];) {
+			if (script.className !== expose && script.readyState === 'interactive') {
 				script.className = expose;
 				return isLtIE8 ? script.getAttribute('src', 4) : script.src;
 			}
@@ -50,19 +50,19 @@ const NowSrcPath = srcPath.substring(0, srcPath.lastIndexOf("/"));
 
 class loadpage {
 	constructor(options) {
-		
+
 		let that = this;
-		
+
 		this.srcPath = NowSrcPath;
-		
+
 		this.loadCss = NowSrcPath + '/css/default.css'; // 要加载的css
-		
+
 		this.animateCss = NowSrcPath + '/css/animate.css'; // 要加载动画css
-		
+
 		this.animateName = 'fadeOut'; // 要执行的动画名称
 
 		this.delayTime = 3000; // 延迟时间 
-		
+
 		this.loadMode = 'all'; // 加载方式,part(局部,也就是dom渲染完),all(等待图片等资源)
 
 		this.divHtml = `
@@ -75,7 +75,7 @@ class loadpage {
 		}
 	}
 	static isSystem() {
-        if ("undefined" != typeof __webpack_modules__){
+		if ("undefined" != typeof __webpack_modules__) {
 			return 'webpack';
 		} else if (typeof window === 'object') {
 			return 'win';
@@ -83,12 +83,12 @@ class loadpage {
 			return 'node';
 		}
 	}
-	
+
 	loading() {
 		this.openLoading();
 		this.addHeadJs();
 	}
-	
+
 	addHeadCss() {
 		let head = document.getElementsByTagName('head')[0];
 		let style = document.createElement('style');
@@ -117,33 +117,33 @@ class loadpage {
 	}
 	openLoading() {
 		this.addHeadCss();
-		if (loadpage.isSystem()==='win') {
+		if (loadpage.isSystem() === 'win') {
 			this.loadStyle(this.loadCss, 'head');
-			this.loadStyle(this.animateCss,'head');
+			this.loadStyle(this.animateCss, 'head');
 		}
 		this.addLoadIngDiv();
 	}
 	closeLoading() {
-		this.closePageLoading(this.animateName,this.delayTime);
+		this.closePageLoading(this.animateName, this.delayTime);
 	}
-	closePageLoading(animateName,delayTime) {
+	closePageLoading(animateName, delayTime) {
 		let box = document.getElementById("fc_loader");
-		let a_time = Math.round(delayTime/1000);
-	    let animation = `${animateName} ${a_time}s`;
-	    box.style.animation=animation;
-		setTimeout(function(){
+		let a_time = Math.round(delayTime / 1000);
+		let animation = `${animateName} ${a_time}s`;
+		box.style.animation = animation;
+		setTimeout(function () {
 			if (box) {
 				box.remove();
 			}
-		},(delayTime));
+		}, (delayTime));
 	}
 	addHeadJs() {
 		let head = document.getElementsByTagName('head')[0];
 		let script = document.createElement('script');
 		script.type = 'text/javascript';
-		if(loadpage.isSystem() === 'webpack'){
-		    this.closeLoading2 = `${this.closePageLoading}`;
-		}else{
+		if (loadpage.isSystem() === 'webpack') {
+			this.closeLoading2 = `${this.closePageLoading}`;
+		} else {
 			this.closeLoading2 = `function ${this.closePageLoading}`;
 		}
 		let dom_load = `
@@ -160,7 +160,7 @@ class loadpage {
 			}
 		`;
 		let load = all_load;
-		if(this.loadMode === 'part'){
+		if (this.loadMode === 'part') {
 			load = dom_load;
 		}
 		script.text = load;

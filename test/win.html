@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Expires" content="0">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="Cache" content="no-cache">	
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>demo-win加载</title>	
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>demo-win加载</title>
+
 <body>
-<div style="margin:0 auto;text-align:center;">
-<img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
-</div>
+	<div style="margin:0 auto;text-align:center;">
+		<img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
+	</div>
 </body>
 <script type="text/javascript" src='../src/loadpage.js'></script>
 <script>
-let div_str = `
+	let div_str = `
 	<div class="container">
 		<div class="wrapper">
 			<div class="loader">
@@ -47,7 +48,8 @@ let div_str = `
 			加载中</div>
 	</div>
 `;
-let load = new loadpage({ delayTime: 3000, divHtml: div_str, loadCss: './css/win.css', animateName:'pullUp'});
-load.loading();	
+	let load = new loadpage({ delayTime: 3000, divHtml: div_str, loadCss: './css/win.css', animateName: 'pullUp' });
+	load.loading();
 </script>
+
 </html>
