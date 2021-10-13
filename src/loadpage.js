@@ -45,10 +45,10 @@
 }(window));
 
 let srcPath = getCurrAbsPath();
+
 const NowSrcPath = srcPath.substring(0, srcPath.lastIndexOf("/"));
 
 class loadpage {
-	// 构造函数,开始了
 	constructor(options) {
 		
 		let that = this;
