@@ -7,29 +7,12 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">	
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>demo</title>	
-	<link type="text/css" rel="stylesheet" href="./css/pure-min.css">
+	<title>demo-win加载</title>	
 <body>
-
 <img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
-
-
-<img src="https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
 </body>
-<script type="text/javascript" src='./src/loadpage.js'></script>
+<script type="text/javascript" src='../src/loadpage.js'></script>
 <script>
-/**
-let div_str = `
-  <ul role="progressbar" style="margin:auto;">
-    <li role="presentation"></li>
-    <li role="presentation"></li>
-    <li role="presentation"></li>
-    <li role="presentation"></li>
-    <li role="presentation"></li>
-    <li role="presentation"></li>
-    <li role="presentation"></li>
-  </ul>`;
-**/
 let div_str = `
 	<div class="container">
 		<div class="wrapper">
@@ -62,7 +45,7 @@ let div_str = `
 			加载中</div>
 	</div>
 `;
-let load = new loadpage({ delayTime: 1000, divHtml: div_str, loadCss: './css/style3.css', animateName:'pullUp'});
-load.loading();
+let load = new loadpage({ delayTime: 3000, divHtml: div_str, loadCss: './css/win.css', animateName:'pullUp'});
+load.loading();	
 </script>
 </html>

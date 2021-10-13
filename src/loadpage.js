@@ -7,33 +7,73 @@
  * time: 2021/09/28 17:41
  */
 
+;(function(exports){
+	var doc = exports.document,
+		a = {},
+		expose = +new Date(),
+		rExtractUri = /((?:http|https|file):\/\/.*?\/[^:]+)(?::\d+)?:\d+/,
+		isLtIE8 = ('' + doc.querySelector).indexOf('[native code]') === -1;
+	exports.getCurrAbsPath = function(){
+		// FF,Chrome
+		if (doc.currentScript){
+			return doc.currentScript.src;
+		}
+		var stack;
+		try{
+			a.b();
+		}
+		catch(e){
+			stack = e.fileName || e.sourceURL || e.stack || e.stacktrace;
+		}
+		// IE10
+		if (stack){
+			var absPath = rExtractUri.exec(stack)[1];
+			if (absPath){
+				return absPath;
+			}
+		}
+		// IE5-9
+		for(var scripts = doc.scripts,
+			i = scripts.length - 1,
+			script; script = scripts[i--];){
+			if (script.className !== expose && script.readyState === 'interactive'){
+				script.className = expose;
+				return isLtIE8 ? script.getAttribute('src', 4) : script.src;
+			}
+		}
+	};
+}(window));
+
+let srcPath = getCurrAbsPath();
+const NowSrcPath = srcPath.substring(0, srcPath.lastIndexOf("/"));
+
 class loadpage {
 	// 构造函数,开始了
 	constructor(options) {
 		
 		let that = this;
 		
-		this.loadCss = './css/style.css'; // 要加载的css
+		this.srcPath = NowSrcPath;
 		
-		this.animateCss = './css/animate.css'; // 要加载动画css
+		this.loadCss = NowSrcPath + '/css/default.css'; // 要加载的css
+		
+		this.animateCss = NowSrcPath + '/css/animate.css'; // 要加载动画css
 		
 		this.animateName = 'fadeOut'; // 要执行的动画名称
 
-		this.delayTime = 1000; // 延迟时间 
+		this.delayTime = 3000; // 延迟时间 
 		
 		this.loadMode = 'all'; // 加载方式,part(局部,也就是dom渲染完),all(等待图片等资源)
 
 		this.divHtml = `
             <div class="loader"><div class="inner one"></div><div class="inner two"></div><div class="inner three"></div></div>		
 		`;
-		// 这里用了个暴力的方式来覆盖初始配置
 		for (let key in options) {
 			if (key in that) {
 				that[key] = options[key];
 			}
-		}	
+		}
 	}
-	// 判断执行模式
 	static isSystem() {
         if ("undefined" != typeof __webpack_modules__){
 			return 'webpack';
@@ -75,7 +115,6 @@ class loadpage {
 		}
 		head.appendChild(style);
 	}
-	// 开启loading
 	openLoading() {
 		this.addHeadCss();
 		if (loadpage.isSystem()==='win') {
@@ -84,7 +123,6 @@ class loadpage {
 		}
 		this.addLoadIngDiv();
 	}
-	// 关闭loading
 	closeLoading() {
 		this.closePageLoading(this.animateName,this.delayTime);
 	}
@@ -179,8 +217,6 @@ class loadpage {
 		div.innerHTML = html;
 		parent.appendChild(div);
 	}
-
-	// 设置样式
 	setStyle() {
 		let body = document.body;
 		let html = document.documentElement;
@@ -190,7 +226,6 @@ class loadpage {
 		body.style.height = "auto";
 	}
 }
-
 ; (function (factory) {
 	if (typeof exports === "object") {
 		module.exports = factory();
@@ -206,6 +241,6 @@ class loadpage {
 		glob.loadpage = factory();
 	}
 })(function () {
-	'use strice';	
+	'use strice';
 	return loadpage;
 });
