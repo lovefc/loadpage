@@ -10,7 +10,7 @@
 **如何使用：** 
 - `new loadpage({ delayTime: 3000}).loading();`
 
-** 案例展示 **
+**案例展示：** 
 
 * [默认加载](https://loadpage.lovefc.cn/test/index.html)
 * [win样式加载](https://loadpage.lovefc.cn/test/win.html)
