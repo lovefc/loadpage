@@ -7,16 +7,19 @@
 <meta http-equiv="Cache-control" content="no-cache">
 <meta http-equiv="Cache" content="no-cache">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>demo-默认加载</title>
+<title>demo-自定义加载</title>
 
 <body>
     <div style="margin:0 auto;text-align:center;">
+	    <a href="#" id="load">点击此处加载,3s后自动关闭</a><br />
         <img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
     </div>
 </body>
 <script type="text/javascript" src='../src/loadpage.js'></script>
 <script>
-     new loadpage({ delayTime: 3000 }).loading();
+	document.getElementById("load").onclick=function(){
+	    new loadpage({ delayTime: 3000 }).closeLoading();
+	};
 </script>
 
 </html>

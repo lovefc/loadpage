@@ -52,12 +52,12 @@ class loadpage {
 	constructor(options) {
 
 		let that = this;
-
+			
 		this.srcPath = NowSrcPath;
 
-		this.loadCss = NowSrcPath + '/css/default.css'; // 要加载的css
+		this.themeCss = ''; // 要加载的css
 
-		this.animateCss = NowSrcPath + '/css/animate.css'; // 要加载动画css
+		this.defaultCss = NowSrcPath + '/css/default.css'; // 要加载动画css
 
 		this.animateName = 'fadeOut'; // 要执行的动画名称
 
@@ -68,11 +68,20 @@ class loadpage {
 		this.divHtml = `
             <div class="loader"><div class="inner one"></div><div class="inner two"></div><div class="inner three"></div></div>		
 		`;
+		this.loadID = 'fc_loader';
 		for (let key in options) {
 			if (key in that) {
 				that[key] = options[key];
 			}
 		}
+        this.addLoadIngDiv(this.loadID);
+		if (loadpage.isSystem() === 'win') {
+			this.loadStyle(this.defaultCss, 'head');
+			if(this.themeCss){
+			    this.loadStyle(this.themeCss, 'head');
+			}			
+		}
+        this.dom = document.getElementById(this.loadID);		
 	}
 	static isSystem() {
 		if ("undefined" != typeof __webpack_modules__) {
@@ -83,51 +92,17 @@ class loadpage {
 			return 'node';
 		}
 	}
-
 	loading() {
-		this.openLoading();
 		this.addHeadJs();
 	}
-
-	addHeadCss() {
-		let head = document.getElementsByTagName('head')[0];
-		let style = document.createElement('style');
-		let css = `
-            .fc_loadpage{
-                width:100% !important;
-                height:calc(100%) !important;
-				background-image: radial-gradient(circle farthest-corner at center, #FFF 0%, #F8F8F8 100%) !important;
-				opacity:1 !important;
-				filter:alpha(opacity=100) !important;
-				overflow:visible !important;
-				position:fixed !important;
-				top:0 !important;
-				left:0 !important;
-				bottom:0 !important;
-				right:0 !important;
-				z-index:9998;
-			}	
-		`;
-		if (style.styleSheet) {
-			style.styleSheet.cssText = css;
-		} else {
-			style.appendChild(document.createTextNode(css));
-		}
-		head.appendChild(style);
-	}
-	openLoading() {
-		this.addHeadCss();
-		if (loadpage.isSystem() === 'win') {
-			this.loadStyle(this.loadCss, 'head');
-			this.loadStyle(this.animateCss, 'head');
-		}
-		this.addLoadIngDiv();
-	}
 	closeLoading() {
-		this.closePageLoading(this.animateName, this.delayTime);
+		this.closePageLoading(this.loadID, this.animateName, this.delayTime);
 	}
-	closePageLoading(animateName, delayTime) {
-		let box = document.getElementById("fc_loader");
+	closePageLoading(loadID, animateName, delayTime) {
+		let box = document.getElementById(loadID);		
+		if(!box){
+			return false;
+		}
 		let a_time = Math.round(delayTime / 1000);
 		let animation = `${animateName} ${a_time}s`;
 		box.style.animation = animation;
@@ -137,6 +112,7 @@ class loadpage {
 			}
 		}, (delayTime));
 	}
+	// 加载后关闭
 	addHeadJs() {
 		let head = document.getElementsByTagName('head')[0];
 		let script = document.createElement('script');
@@ -148,14 +124,14 @@ class loadpage {
 		}
 		let dom_load = `
 			document.addEventListener('DOMContentLoaded',function(){
-	            setTimeout(${this.closeLoading2}("${this.animateName}",${this.delayTime}),${this.delayTime});
+	            setTimeout(${this.closeLoading2}("${this.loadID}","${this.animateName}",${this.delayTime}),${this.delayTime});
             });		
 	    `;
 		let all_load = `
             document.onreadystatechange = runLoading; 
 			function runLoading(){
 				if(document.readyState == "complete"){
-					setTimeout(${this.closeLoading2}("${this.animateName}",${this.delayTime}),${this.delayTime});
+					setTimeout(${this.closeLoading2}("${this.loadID}","${this.animateName}",${this.delayTime}),${this.delayTime});
 				}
 			}
 		`;
@@ -165,12 +141,6 @@ class loadpage {
 		}
 		script.text = load;
 		head.appendChild(script);
-	}
-	completeLoading() {
-		if (document.readyState == "complete") {
-			let box = document.getElementById("fc_loader");
-			box.remove();
-		}
 	}
 	loadStyle(url, tagname) {
 		let link = document.createElement('link');
@@ -207,12 +177,12 @@ class loadpage {
 				allsuspects[i].parentNode.removeChild(allsuspects[i]);
 		}
 	}
-	addLoadIngDiv() {
+	addLoadIngDiv(loadid) {
 		let parent = document.body;
 		let div = document.createElement("div");
 		let divhtml = this.divHtml;
 		let html = `
-		    <div class="fc_loadpage" id="fc_loader">${divhtml}</div>
+		    <div id="${loadid}">${divhtml}</div>
 		`;
 		div.innerHTML = html;
 		parent.appendChild(div);
