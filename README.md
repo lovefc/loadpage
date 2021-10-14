@@ -19,9 +19,10 @@ load.loading();	`
 | delayTime | 否  |int | 执行时间,单位毫秒,默认3000   |
 | loadMode  | 否  |string | 加载方式,part(局部,也就是dom渲染完),all(等待图片等资源)   |
 | divHtml | 否  | string | 渲染的html,自定义样式时候使用   |
-| loadCss | 否  | string | 要加载的css样式   |
-| animateCss | 否  | string | 要加载的动画样式   |
+| themeCss | 否  | string | 要加载的css样式   |
 | animateName | 否  | string | 要执行的动画名称   |
+| defaultCss | 否  | string | 默认加载的样式,大可不必更改   |
+| loadID | 否  | string | 默认加载的id名称,大可不必更改   |
 
 **作者备注**
 - 如果发现问题，欢迎向我反馈，毕竟一个人测试有限，会有注意不到的地方。
