@@ -8,9 +8,7 @@
 
 
 **如何使用：** 
-- ` 
-let load = new loadpage({ delayTime: 3000});
-load.loading();	`
+- `new loadpage({ delayTime: 3000}).loading();`
 
 **配置参数：** 
 
