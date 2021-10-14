@@ -6,6 +6,7 @@
 
 - 在线演示：https://lovefc.gitee.io/loadpage/test
 
+![演示动画](./demo.gif)
 
 **如何使用：** 
 - `new loadpage({ delayTime: 3000}).loading();`
