@@ -186,7 +186,7 @@ class loadpage {
 		}
 	}
 	addLoadIngDiv(loadid) {
-		let parent = document.body;
+		let parent = document.documentElement;
 		let div = document.createElement("div");
 		let divhtml = this.divHtml;
 		let html = `
