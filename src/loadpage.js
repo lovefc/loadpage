@@ -57,7 +57,7 @@ class loadpage {
 
 		this.themeCss = ''; // 要加载的css
 
-		this.defaultCss = NowSrcPath + '/css/default.css'; // 要加载动画css
+		this.defaultCss = NowSrcPath + '/css/default.css'; // 要加载的默认css
 
 		this.animateName = 'fadeOut'; // 要执行的动画名称
 
@@ -113,7 +113,6 @@ class loadpage {
 			}
 		}, (delayTime));
 	}
-	// 加载后关闭
 	addHeadJs() {
 		let head = document.getElementsByTagName('head')[0];
 		let script = document.createElement('script');
