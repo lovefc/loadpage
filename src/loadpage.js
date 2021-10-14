@@ -66,7 +66,7 @@ class loadpage {
 		this.loadMode = 'all'; // 加载方式,part(局部,也就是dom渲染完),all(等待图片等资源)
 
 		this.divHtml = `
-            <div class="loader"><div class="inner one"></div><div class="inner two"></div><div class="inner three"></div></div>		
+            <div class="fc_load_inner"><div class="fc_inner one"></div><div class="fc_inner two"></div><div class="fc_inner three"></div></div>		
 		`;
 		this.loadID = 'fc_loader';
 		for (let key in options) {
@@ -74,14 +74,15 @@ class loadpage {
 				that[key] = options[key];
 			}
 		}
+		
         this.addLoadIngDiv(this.loadID);
+		
 		if (loadpage.isSystem() === 'win') {
 			this.loadStyle(this.defaultCss, 'head');
 			if(this.themeCss){
 			    this.loadStyle(this.themeCss, 'head');
 			}			
 		}
-        this.dom = document.getElementById(this.loadID);		
 	}
 	static isSystem() {
 		if ("undefined" != typeof __webpack_modules__) {
