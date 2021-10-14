@@ -10,6 +10,12 @@
 **如何使用：** 
 - `new loadpage({ delayTime: 3000}).loading();`
 
+** 案例展示 **
+
+* [默认加载](https://loadpage.lovefc.cn/test/index.html)
+* [win样式加载](https://loadpage.lovefc.cn/test/win.html)
+* [自触发加载](https://loadpage.lovefc.cn/test/custom.html)
+
 **配置参数：** 
 
 |参数名|必选|类型|说明|
