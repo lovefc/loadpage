@@ -8,7 +8,7 @@
 
 ![演示动画](./demo.gif)
 
-**如何使用：** 
+**如何使用** 
 - `new loadpage({ delayTime: 3000}).loading();`
 
 **案例展示：** 
@@ -17,7 +17,7 @@
 * [win样式加载](https://loadpage.lovefc.cn/test/win.html)
 * [自触发加载](https://loadpage.lovefc.cn/test/custom.html)
 
-**配置参数：** 
+**配置参数** 
 
 |参数名|必选|类型|说明|
 |:----    |:---|:----- |-----   |
@@ -28,7 +28,8 @@
 | animateName | 否  | string | 要执行的动画名称   |
 | defaultCss | 否  | string | 默认加载的样式,大可不必更改   |
 | loadID | 否  | string | 默认加载的id名称,大可不必更改   |
-
+**注意事项**
+- 为了确保能够加载中不闪屏,请把js放在head头中或者body标签的上面
 **作者备注**
 - 如果发现问题，欢迎向我反馈，毕竟一个人测试有限，会有注意不到的地方。
 - 作者QQ：1102952084
