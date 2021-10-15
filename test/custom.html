@@ -10,11 +10,6 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>demo-自定义加载</title>
 <script type="text/javascript" src='../src/loadpage.js'></script>
-<script>
-	document.getElementById("load").onclick=function(){
-	    new loadpage({ delayTime: 3000 }).closeLoading();
-	};
-</script>
 </head>
 <body>
     <div style="margin:0 auto;text-align:center;">
@@ -22,4 +17,9 @@
         <img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
     </div>
 </body>
+<script>
+	document.getElementById("load").onclick=function(){
+	    new loadpage({ delayTime: 3000 }).closeLoading();
+	};
+</script>
 </html>
