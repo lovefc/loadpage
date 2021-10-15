@@ -4,8 +4,6 @@
 
 - 使用简单,操作自由,支持webpack打包使用,创建属于自己的加载动画
 
-- 在线演示：https://lovefc.gitee.io/loadpage/test
-
 ![演示动画](./demo.gif)
 
 **如何使用** 
