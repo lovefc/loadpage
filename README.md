@@ -26,12 +26,10 @@
 | animateName | 否  | string | 要执行的动画名称,默认的动画有fadeOut(渐隐),pullUp(延迟上拉),pullDown(延迟下拉)   |
 | defaultCss | 否  | string | 默认加载的样式,大可不必更改   |
 | loadID | 否  | string | 默认加载的id名称,大可不必更改   |
+
+
 **注意事项**
 - 为了确保能够加载中不闪屏,请把js放在head头中或者body标签的上面
-**作者备注**
-- 如果发现问题，欢迎向我反馈，毕竟一个人测试有限，会有注意不到的地方。
-- 作者QQ：1102952084
-- 作者博客：lovefc.cn
 
 
 
