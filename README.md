@@ -23,7 +23,7 @@
 | loadMode  | 否  |string | 加载方式,part(局部,也就是dom渲染完),all(等待图片等资源)   |
 | divHtml | 否  | string | 渲染的html,自定义样式时候使用   |
 | themeCss | 否  | string | 要加载的css样式   |
-| animateName | 否  | string | 要执行的动画名称   |
+| animateName | 否  | string | 要执行的动画名称,默认的动画有fadeOut(渐隐),pullUp(延迟上拉),pullDown(延迟下拉)   |
 | defaultCss | 否  | string | 默认加载的样式,大可不必更改   |
 | loadID | 否  | string | 默认加载的id名称,大可不必更改   |
 **注意事项**
