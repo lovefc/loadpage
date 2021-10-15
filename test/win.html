@@ -8,12 +8,6 @@
 <meta http-equiv="Cache" content="no-cache">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>demo-win加载</title>
-
-<body>
-	<div style="margin:0 auto;text-align:center;">
-		<img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
-	</div>
-</body>
 <script type="text/javascript" src='../src/loadpage.js'></script>
 <script>
 	let div_str = `
@@ -50,5 +44,9 @@
 `;
   new loadpage({ delayTime: 5000, divHtml: div_str, themeCss: './css/win.css', animateName: 'pullUp' }).loading();
 </script>
-
+<body>
+	<div style="margin:0 auto;text-align:center;">
+		<img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
+	</div>
+</body>
 </html>
