@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Expires" content="0">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Cache-control" content="no-cache">
-<meta http-equiv="Cache" content="no-cache">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>demo-默认加载</title>
-<script type="text/javascript" src='../src/loadpage.js'></script>
-<script>
-     new loadpage({ delayTime: 3000 }).loading();
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo-默认加载</title>
+    <style>
+        .pic {
+            width: 100%;
+        }
+
+        .main {
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .main a {
+            margin: 10px;
+            color: #49549e;
+            display: inline-block;
+        }
+
+        @media (min-width: 48em) {
+            .pic {
+                width: 600px;
+            }
+        }
+    </style>
+    <script type="text/javascript" src='../src/loadpage.js'></script>
+    <script>
+        new loadpage({ delayTime: 3000 }).loading();
+    </script>
 </head>
+
 <body>
-    <div style="margin:0 auto;text-align:center;">
-        <img src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
+    <div class="main">
+        <a href="index.html">默认加载效果预览</a><br />
+        <a href="win.html">win加载效果预览</a><br />
+        <a href="custom.html">手动触发加载效果预览</a><br />
+        <a href="text.html">自定义文字加载效果预览</a><br /><br />
+        <img class="pic" src="https://cdn.pixabay.com/photo/2020/12/15/14/35/girl-5833835_960_720.jpg">
     </div>
 </body>
+
 </html>
